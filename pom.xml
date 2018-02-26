@@ -1,0 +1,130 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.idvp.plugins</groupId>
+    <artifactId>postprocess-root</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+    <name>Class file postprocessing plugin root</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.version>3.5.0</maven.version>
+        <maven.plugin.testing.version>2.1</maven.plugin.testing.version>
+        <maven.plugin.plugin.version>3.5</maven.plugin.plugin.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <junit.version>4.8.1</junit.version>
+        <javassist.version>3.22.0-GA</javassist.version>
+    </properties>
+
+	<modules>
+		<module>api</module>
+		<module>plugin</module>
+	</modules>
+
+    <dependencyManagement>
+    	<dependencies>
+    		<!-- Bytecode magic -->
+    		<dependency>
+			    <groupId>org.javassist</groupId>
+			    <artifactId>javassist</artifactId>
+			    <version>3.22.0-GA</version>
+			</dependency>
+
+	        <!-- Maven plugin and api classes -->
+	        <dependency>
+	            <groupId>org.apache.maven</groupId>
+	            <artifactId>maven-artifact</artifactId>
+	            <version>${maven.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven</groupId>
+	            <artifactId>maven-plugin-api</artifactId>
+	            <version>${maven.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven</groupId>
+	            <artifactId>maven-model</artifactId>
+	            <version>${maven.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven</groupId>
+	            <artifactId>maven-core</artifactId>
+	            <version>${maven.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven</groupId>
+	            <artifactId>maven-repository-metadata</artifactId>
+	            <version>${maven.version}</version>
+	        </dependency>
+
+	        <dependency>
+	            <groupId>org.apache.maven.plugin-tools</groupId>
+	            <artifactId>maven-plugin-annotations</artifactId>
+	            <version>${maven.plugin.plugin.version}</version>
+	        </dependency>
+
+	        <!--Test dependencies-->
+	        <dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>${junit.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven.plugin-testing</groupId>
+	            <artifactId>maven-plugin-testing-tools</artifactId>
+	            <version>${maven.plugin.testing.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven.plugin-testing</groupId>
+	            <artifactId>maven-plugin-testing-harness</artifactId>
+	            <version>${maven.plugin.testing.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+
+			<!-- SLF4J -->
+	        <dependency>
+	            <groupId>org.slf4j</groupId>
+	            <artifactId>slf4j-api</artifactId>
+	            <version>${slf4j.version}</version>
+	        </dependency>
+	    </dependencies>
+    </dependencyManagement>
+    <build>
+    	<pluginManagement>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.codehaus.plexus</groupId>
+	                <artifactId>plexus-component-metadata</artifactId>
+	                <version>1.7.1</version>
+	            </plugin>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-plugin-plugin</artifactId>
+	                <version>${maven.plugin.plugin.version}</version>
+	            </plugin>
+	            <plugin>
+	                <inherited>true</inherited>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <version>3.1</version>
+	                <configuration>
+	                    <source>1.8</source>
+	                    <target>1.8</target>
+	                </configuration>
+	            </plugin>
+
+	        </plugins>
+	    </pluginManagement>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>idvp-releases</id>
+            <url>http://mvn-repository.ru/content/repositories/idvp-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>idvp-snapshots</id>
+            <url>http://mvn-repository.ru/content/repositories/idvp-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

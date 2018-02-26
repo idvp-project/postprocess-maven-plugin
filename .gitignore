@@ -1,0 +1,28 @@
+########### total ###########
+
+logs
+*.log
+pids
+*.pid
+*.seed
+lib-cov
+coverage
+.grunt
+build/Release
+codekit-config.json
+.DS_Store
+.lock-wscript
+.bower-cache
+.bower-registry
+
+########### backend ###########
+
+# idea
+.idea
+*.iml
+
+# maven
+target
+dependency-reduced-pom.xml
+
+###### docker ######
